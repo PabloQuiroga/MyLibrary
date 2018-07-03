@@ -1,4 +1,4 @@
-package com.pablo.mylibrary;
+package com.pablo.mylibrary.gps;
 
 import android.Manifest;
 import android.app.Activity;
