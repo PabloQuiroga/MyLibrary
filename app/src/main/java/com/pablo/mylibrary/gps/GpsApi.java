@@ -35,7 +35,6 @@ public class GpsApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiCli
                 .build();
         apiClient.connect();
 
-        updateCoords();
     }
 
     private void updateCoords(){
@@ -43,7 +42,7 @@ public class GpsApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiCli
             if (location.getProvider() != null) {
                 latitud = location.getLatitude();
                 longitud = location.getLongitude();
-                //}
+                Toast.makeText(ctx, "latitud: "+latitud +" longitud: "+longitud, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(ctx, "Ubicacion no activa", Toast.LENGTH_LONG).show();
                 return;
@@ -63,12 +62,12 @@ public class GpsApi implements GoogleApiClient.ConnectionCallbacks, GoogleApiCli
             }
         }
         location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
-
+        updateCoords();
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        apiClient.disconnect();
     }
 
     @Override
