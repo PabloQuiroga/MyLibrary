@@ -1,12 +1,20 @@
 package com.pablo.mylibrary.servicios;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.pablo.mylibrary.programados.Alarma;
+
 public class ServicioSimple extends Service {
 
-    public ServicioSimple(){
+    private Context ctx;
+    Alarma alarma = new Alarma();
+
+    public ServicioSimple(){}
+    public ServicioSimple(Context context){
+        this.ctx = context;
     }
 
     @Override
@@ -16,7 +24,8 @@ public class ServicioSimple extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        alarma.setAlarm(ctx);
+        return START_STICKY;
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class ServiceSchedule extends JobService {
+
     @Override
     public boolean onStartJob(JobParameters params) {
         return false;
