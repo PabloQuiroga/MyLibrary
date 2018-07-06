@@ -30,7 +30,7 @@ public class Alarma extends BroadcastReceiver {
             AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent i = new Intent(context, Alarma.class);
             PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-            am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 86400, pi); //24hs
+            am.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000*60*2, pi);
         }else{
             scheduleJob(context);
         }
