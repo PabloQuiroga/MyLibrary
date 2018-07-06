@@ -1,25 +1,22 @@
 package com.pablo.mylibrary;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.pablo.mylibrary.gps.Gps;
 import com.pablo.mylibrary.gps.GpsApi;
 import com.pablo.mylibrary.servicios.ServiceIntent;
 import com.pablo.mylibrary.servicios.ServiceSimple;
-import com.pablo.mylibrary.varios.ProgressReceiver;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button button, btn2;
     Button btnService, btnService2;
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnService.setOnClickListener(this);
         btnService2.setOnClickListener(this);
 
-        //TODO lo lanza en ambos servicios
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ServiceIntent.ACTION_PROGRESO);
-        filter.addAction(ServiceIntent.ACTION_FIN);
-        ProgressReceiver rcv = new ProgressReceiver();
-        registerReceiver(rcv, filter);
     }
 
     @Override
@@ -56,11 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case R.id.btn_serv:{
-                Intent intent = new Intent(this, ServiceSimple.class);
+                intent = new Intent(this, ServiceSimple.class);
                 startService(intent);
             }
             case R.id.btn_serv_2:{
-                Intent intent = new Intent(this, ServiceIntent.class);
+                intent = new Intent(this, ServiceIntent.class);
                 intent.putExtra("iteraciones", 10);
                 startService(intent);
             }
@@ -70,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //stopService(intent);
+        stopService(intent);
     }
 
 }

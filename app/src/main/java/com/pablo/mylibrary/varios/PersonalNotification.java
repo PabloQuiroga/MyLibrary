@@ -23,6 +23,12 @@ public class PersonalNotification {
         this.mensaje = message;
         this.pendingIntent = pendingIntent;
     }
+    public PersonalNotification(Context context, String title, String message){
+        this.ctx = context;
+        manager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.titulo = title;
+        this.mensaje = message;
+    }
 
     public void lanzar() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(

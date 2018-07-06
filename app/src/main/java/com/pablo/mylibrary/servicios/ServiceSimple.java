@@ -28,10 +28,10 @@ public class ServiceSimple extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "servicio iniciado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "marcha peronista aqui", Toast.LENGTH_SHORT).show();
 
-        mp = MediaPlayer.create(this, R.raw.marcha_peronista);
-        mp.start();
+        /*mp = MediaPlayer.create(this, R.raw.super_mario_bros_underground);
+        mp.start();*/
 
         Intent mIntent = new Intent(this, MainActivity.class); //intent para la notificacion
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, mIntent, 0);
@@ -51,6 +51,7 @@ public class ServiceSimple extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        notification.detener();
         Toast.makeText(this, "Servicio destruído!", Toast.LENGTH_SHORT).show();
     }
 }

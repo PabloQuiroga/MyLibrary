@@ -1,20 +1,14 @@
 package com.pablo.mylibrary.servicios;
 
 import android.app.IntentService;
-import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.pablo.mylibrary.MainActivity;
-import com.pablo.mylibrary.varios.PersonalNotification;
-
-// TODO http://programandoointentandolo.com/2014/07/iniciar-servicio-android-automaticamente.html
 public class ServiceIntent extends IntentService {
-
-    PersonalNotification notification;
-    public static final String ACTION_PROGRESO = "com.pablo.mylibrary.servicios.PROGRESO";
-    public static final String ACTION_FIN = "com.pablo.mylibrary.servicios.FIN";
 
     public ServiceIntent(){
         super("ServiceIntent");
@@ -25,30 +19,26 @@ public class ServiceIntent extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-
+        //TODO mostrar mensaje tipo Toast sobre el progreso
         int itera = intent.getExtras().getInt("iteraciones");
 
-        for (int i = 0; i < itera; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(5000);
-                        //Comunicamos el progreso
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-
-            Intent mIntent = new Intent();
-            mIntent.setAction(ACTION_PROGRESO);
-            mIntent.putExtra("progreso", i);
-            sendBroadcast(mIntent);
+        for (int i = 1; i <= itera; i++) {
+            Log.e("iteracion", ""+i);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        Intent mIntent = new Intent();
-        mIntent.setAction(ACTION_FIN);
-        sendBroadcast(mIntent);
+        Handler mHandler = new Handler(getMainLooper());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(),"iteracion finalizada!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        Log.e("iteracion", "Finalizado!");
     }
+
 }
