@@ -49,7 +49,7 @@ public class Gps implements LocationListener {
         longitud = location.getLongitude();
 
         Toast.makeText(context, "latitud: "+latitud +" longitud: "+longitud, Toast.LENGTH_LONG).show();
-        //Log.e("latitud", ""+latitud);//TODO imprime bien
+        Log.e("latitud", ""+latitud);//TODO imprime bien
     }
 
     @Override
